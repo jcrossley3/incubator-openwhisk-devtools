@@ -25,7 +25,6 @@ EndOfMessage
   OPENWHISK_DIR=$HOME/workspace/openwhisk
 else
   OPENWHISK_DIR="$2"
-exit 1
 fi
 
 
@@ -61,7 +60,6 @@ pushd $SCRIPTDIR/nginx
 
  NGINX_IMAGE=$(docker build . | grep "Successfully built" | awk '{print $3}')
  docker tag $NGINX_IMAGE "$1"/whisk_nginx
- docker push "$1"/whisk_nginx
 
  # cleanup
  rm wsk
@@ -76,7 +74,6 @@ pushd $SCRIPTDIR/..
 
  WHISK_DEPLOY_IMAGE=$(docker build . | grep "Successfully built" | awk '{print $3}')
  docker tag $WHISK_DEPLOY_IMAGE "$1"/whisk_config:dev
- docker push "$1"/whisk_config:dev
 
  # rm the whisk cli to keep things clean
  rm wsk

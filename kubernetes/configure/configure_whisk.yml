@@ -17,5 +17,5 @@ spec:
       containers:
       - name: configure-openwhisk
         image: danlavine/whisk_config:dev
-        imagePullPolicy: Always
+        # imagePullPolicy: Always
         command: [ "/openwhisk-devtools/kubernetes/configure/configure.sh" ]
