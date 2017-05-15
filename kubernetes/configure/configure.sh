@@ -65,18 +65,4 @@ pushd /openwhisk-devtools/kubernetes/ansible
 
   # Post deploy step
   ansible-playbook -i environments/kube postdeploy.yml
-
-  # generate a scret with the openwhisk api tokens
-  TMP_FILE=$(mktemp /tmp/whisk-secret.XXXX)
-  cat >$TMP_FILE <<EOL
-apiVersion: v1
-kind: Secret
-metadata:
-  name: openwhisk-auth-tokens
-type: Opaque
-data:
-  auth_whisk_system: $(cat files/auth.whisk.system | base64 --wrap=0)
-  auth_guest: $(cat files/auth.guest | base64 --wrap=0)
-EOL
-  kubectl apply -f $TMP_FILE
 popd
