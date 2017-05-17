@@ -213,23 +213,6 @@ services and jobs. For this, you can run the following script:
 ```
 ./kube_environment/cleanup.sh
 ```
-## Running on Minikube
-
-Set your `apihost` for `wsk` by matching the `nodePort` associated
-with port 443 of the `nginx` service to the appropriate URL returned by
-`minikube service`:
-
-```
-kubectl -n openwhisk get svc/nginx -o yaml
-minikube -n openwhisk service nginx --url --https
-wsk property set --apihost THE-CORRECT-URL
-```
-You'll need to choose the correct URL of the three minikube returns.
-
-Then you'll need to set the `auth` property:
-```
-wsk property set --auth $(kubectl -n openwhisk get secrets/openwhisk-auth-tokens -o yaml | grep " auth_whisk_system:" | awk '{print $2}' | base64 -d)
-```
 ## Troubleshooting
 #### Kafka
 
